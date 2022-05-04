@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+Logged In as {{ user.username }}
+<form action="{% url 'logoutuser' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Logout</button>
+</form>
+{% else %}
+<a href="{% url 'signupuser' %}">Sign up</a>
+<a href="{% url 'loginuser' %}">Login</a>
+{% endif %}
+{% block content %}{% endblock %}
+</body>
+</html>
