@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ category.title }}
+{% endblock %}
+
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+          {% for el in news %}
+          <div class="card mb-3">
+          <div class="card-header">
+              <h5 class="card-title">Категория: {{ el.category }}</h5>
+          </div>
+          <div class="card-body">
+              <div class="media d-flex">
+                  {% if el.photo %}
+                    <img src = "{{ el.photo.url }}" alt="" width="350" class="me-3">
+                  {% else %}
+                    <img src = "https://picsum.photos/seed/picsum/350/235" alt="" class="me-3">
+                  {% endif %}
+                  <div class="media-body">
+                        <h4 class="card-title">Заголовок: {{ el.title }}</h4>
+                        <p class="card-text">Контент: {{ el.content }}</p>
+                        <a href="{{ el.get_absolute_url }}" class="btn btn-primary">Read more</a>
+                  </div>
+              </div>
+          </div>
+          <div class="card-footer text-muted">
+              {{ el.created_at|date:"Y-m-d H:i" }}
+          </div>
+        </div>
+          {% empty %}
+          <p class="card-text">Новостей нет</p>
+       {% endfor %}
+{% endblock %}
+
+
+
