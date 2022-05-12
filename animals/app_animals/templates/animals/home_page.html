@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Список животных: </h1>
+{% if animals %}
+    {% for el in animals %}
+            <div class="row">
+                <div class="col">
+                    <a href="{% url 'detail' el.id %}">Кличка: {{ el.name }}</a>
+                </div>
+            </div>
+    {% endfor %}
+{% if request.user.is_authenticated %}
+    <h2>
+        <a href="{% url 'add_animals' %}">Добавить информацию о новом животном</a>
+    </h2>
+    <p>
+        <a href="{% url 'delete' %}">Удалить всю информацию</a>
+    </p>
+{% else %}
+    <h3>
+        <a href="{% url 'login' %}">Войти в учетную запись</a>
+    </h3>
+    <h3>
+        <a href="{% url 'register' %}">Зарегистрироваться</a>
+    </h3>
+{% endif %}
+{% else %}
+    <h1>Информация отсутствует</h1>
+{% endif %}
+{% endblock %}

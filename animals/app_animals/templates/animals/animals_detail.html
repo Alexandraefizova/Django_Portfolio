@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Детальная информация о животном: </h1>
+{% if animals %}
+            <div class="row">
+                <div class="col">
+                    Кличка: {{ animals.name }}
+                </div>
+                <div class="col">
+                    Возраст: {{ animals.age }}
+                </div>
+                <div class="col">
+                    Дата прибытия: {{ animals.date_arrive|date:"Y-m-d H:i" }}
+                </div>
+                <div class="col">
+                    Особые приметы: {{ animals.special_signs }}
+                </div>
+            </div>
+{% else %}
+    <h1>Информация отсутствует</h1>
+{% endif %}
+{% endblock %}
